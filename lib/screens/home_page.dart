@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crud_firebase/controllers/student_controller.dart';
+import 'package:crud_firebase/models/student.dart';
 import 'package:crud_firebase/screens/form_student.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -95,7 +97,11 @@ class _HomePageState extends State<HomePage> {
                                 motion: StretchMotion(),
                                 children: [
                                   SlidableAction(
-                                    onPressed: (context) {},
+                                    onPressed: (context) {
+                                      StudentController().onDelete(
+                                        Student(id: records.id),
+                                      );
+                                    },
                                     icon: Icons.delete_forever,
                                     backgroundColor: Colors.red,
                                     borderRadius: BorderRadius.circular(5),

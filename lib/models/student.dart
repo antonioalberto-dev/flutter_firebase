@@ -3,7 +3,7 @@ class Student {
 
   Student({
     this.id,
-    required this.name,
+    this.name,
     this.email,
   });
 
