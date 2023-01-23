@@ -41,7 +41,8 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
                 child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                   width: MediaQuery.of(context).size.width,
                   height: 80,
                   child: Card(
@@ -86,7 +87,22 @@ class _HomePageState extends State<HomePage> {
                                 motion: StretchMotion(),
                                 children: [
                                   SlidableAction(
-                                    onPressed: (context) {},
+                                    onPressed: (context) {
+                                      final student = Student(
+                                        id: records.id,
+                                        name: records["name"],
+                                        email: records["email"],
+                                      );
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => FormStudent(
+                                            student: student,
+                                            index: index,
+                                          ),
+                                        ),
+                                      );
+                                    },
                                     icon: Icons.edit_note_rounded,
                                     backgroundColor: Colors.yellowAccent,
                                     borderRadius: BorderRadius.circular(5),

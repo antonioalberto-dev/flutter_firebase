@@ -13,7 +13,7 @@ class StudentController {
 
   // edit student
   Future onUpdate(Student student) async {
-    await _students.doc().update(student.addData());
+    await _students.doc(student.id).update(student.addData());
   }
 
   // remove student
