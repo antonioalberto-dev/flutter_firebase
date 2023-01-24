@@ -54,21 +54,25 @@ class _FormPatientState extends State<FormPatient> {
                 labelText: "Nome",
                 hinterText: null,
                 controller: nameController,
+                icon: Icons.personal_injury_rounded,
               ),
               TextFieldItem(
                 labelText: "Idade",
                 hinterText: null,
                 controller: yearsController,
+                icon: Icons.cookie_rounded,
               ),
               TextFieldItem(
                 labelText: "Telefone",
                 hinterText: null,
                 controller: phoneController,
+                icon: Icons.local_phone_rounded,
               ),
               TextFieldItem(
                 labelText: "Diagnostico",
                 hinterText: null,
                 controller: diagnosticController,
+                icon: Icons.text_snippet_rounded,
               ),
               const SizedBox(height: 10),
               ElevatedButton(

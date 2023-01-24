@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class TextFieldItem extends StatelessWidget {
   final labelText, hinterText;
   final TextEditingController controller;
+  final IconData icon;
 
-  TextFieldItem({
+  const TextFieldItem({
     required this.labelText,
     this.hinterText,
     required this.controller,
+    required this.icon,
   });
 
   @override
@@ -23,7 +25,7 @@ class TextFieldItem extends StatelessWidget {
           errorBorder: const OutlineInputBorder(
             borderSide: BorderSide(width: 3, color: Colors.red),
           ),
-          prefixIcon: const Icon(Icons.email, color: Colors.purple)),
+          prefixIcon: Icon(icon, color: Colors.purple)),
     );
   }
 }

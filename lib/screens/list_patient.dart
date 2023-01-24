@@ -2,19 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crud_firebase/controllers/paciente_controller.dart';
 import 'package:crud_firebase/models/patient.dart';
 import 'package:crud_firebase/screens/form_patient.dart';
-import 'package:crud_firebase/screens/form_patient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class ListPatient extends StatefulWidget {
+  const ListPatient({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<ListPatient> createState() => _ListPatientState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ListPatientState extends State<ListPatient> {
   final CollectionReference _patient =
       FirebaseFirestore.instance.collection("patients");
 
@@ -142,8 +141,6 @@ class _HomePageState extends State<HomePage> {
                                     years: records["years"],
                                     phone: records["phone"],
                                     diagnostic: records["diagnostic"],
-                                    // phone: records["phone"],
-                                    // diagnostic: records["diagnostic"],
                                   );
                                   Navigator.push(
                                     context,
