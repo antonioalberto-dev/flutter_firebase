@@ -1,3 +1,4 @@
+import 'package:crud_firebase/screens/home_page.dart';
 import 'package:crud_firebase/screens/list_patient.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.purple,
         secondaryHeaderColor: Colors.deepPurple
       ),
-      home: const ListPatient(),
+      home: const HomePage(),
     );
   }
 }
