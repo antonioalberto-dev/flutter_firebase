@@ -5,7 +5,7 @@ class TextFieldItem extends StatelessWidget {
   final TextEditingController controller;
   final IconData icon;
 
-  const TextFieldItem({
+  const TextFieldItem({super.key, 
     required this.labelText,
     this.hinterText,
     required this.controller,
@@ -18,14 +18,16 @@ class TextFieldItem extends StatelessWidget {
       controller: controller,
       validator: (value) {
         if (value!.isEmpty) return "The $labelText is required";
+        return null;
       },
       decoration: InputDecoration(
-          labelText: labelText,
-          hintText: hinterText,
-          errorBorder: const OutlineInputBorder(
-            borderSide: BorderSide(width: 3, color: Colors.red),
-          ),
-          prefixIcon: Icon(icon, color: Colors.purple)),
+        labelText: labelText,
+        hintText: hinterText,
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(width: 3, color: Colors.red),
+        ),
+        prefixIcon: Icon(icon, color: Colors.purple),
+      ),
     );
   }
 }
