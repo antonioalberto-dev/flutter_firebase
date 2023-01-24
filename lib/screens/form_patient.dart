@@ -1,32 +1,36 @@
 import 'package:crud_firebase/components/text_field_item.dart';
-import 'package:crud_firebase/controllers/student_controller.dart';
-import 'package:crud_firebase/models/student.dart';
+import 'package:crud_firebase/controllers/paciente_controller.dart';
+import 'package:crud_firebase/models/patient.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class FormStudent extends StatefulWidget {
-  final Student? student;
+class FormPatient extends StatefulWidget {
+  final Patient? patient;
   final index;
 
-  FormStudent({this.student, this.index});
+  FormPatient({this.patient, this.index});
 
   @override
-  State<FormStudent> createState() => _FormStudentState();
+  State<FormPatient> createState() => _FormPatientState();
 }
 
-class _FormStudentState extends State<FormStudent> {
+class _FormPatientState extends State<FormPatient> {
   final _formKey = GlobalKey<FormState>();
   bool isEditingMode = false;
   final TextEditingController idController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController yearsController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController diagnosticController = TextEditingController();
 
   @override
   void initState() {
     if (widget.index != null) {
-      idController.text = widget.student!.id;
-      nameController.text = widget.student!.name;
-      emailController.text = widget.student!.email;
+      idController.text = widget.patient!.id;
+      nameController.text = widget.patient!.name;
+      yearsController.text = widget.patient!.years;
+      phoneController.text = widget.patient!.phone;
+      diagnosticController.text = widget.patient!.diagnostic;
       isEditingMode = true;
     }
     super.initState();
@@ -37,8 +41,8 @@ class _FormStudentState extends State<FormStudent> {
     return Scaffold(
       appBar: AppBar(
         title: isEditingMode == true
-            ? Text("Editando registro")
-            : Text("Cadastrando estudante"),
+            ? Text("Editando")
+            : Text("Cadastrando paciente"),
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -52,24 +56,38 @@ class _FormStudentState extends State<FormStudent> {
                 controller: nameController,
               ),
               TextFieldItem(
-                labelText: "Email",
+                labelText: "Idade",
                 hinterText: null,
-                controller: emailController,
+                controller: yearsController,
+              ),
+              TextFieldItem(
+                labelText: "Telefone",
+                hinterText: null,
+                controller: phoneController,
+              ),
+              TextFieldItem(
+                labelText: "Diagnostico",
+                hinterText: null,
+                controller: diagnosticController,
               ),
               const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     if (isEditingMode == true) {
-                      StudentController().onUpdate(Student(
+                      PatientController().onUpdate(Patient(
                         id: idController.text,
                         name: nameController.text,
-                        email: emailController.text,
+                        years: yearsController.text,
+                        phone: phoneController.text,
+                        diagnostic: diagnosticController.text,
                       ));
                     } else {
-                      StudentController().onCreate(Student(
-                        name: nameController,
-                        email: emailController,
+                      PatientController().onCreate(Patient(
+                        name: nameController.text,
+                        years: yearsController.text,
+                        phone: phoneController.text,
+                        diagnostic: diagnosticController.text,
                       ));
                     }
                   }

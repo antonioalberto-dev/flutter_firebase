@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:crud_firebase/controllers/student_controller.dart';
-import 'package:crud_firebase/models/student.dart';
-import 'package:crud_firebase/screens/form_student.dart';
+import 'package:crud_firebase/controllers/paciente_controller.dart';
+import 'package:crud_firebase/models/patient.dart';
+import 'package:crud_firebase/screens/form_patient.dart';
+import 'package:crud_firebase/screens/form_patient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,15 +15,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final CollectionReference _student =
-      FirebaseFirestore.instance.collection("students");
+  final CollectionReference _patient =
+      FirebaseFirestore.instance.collection("patients");
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Alunos",
+          "Pacientes",
           style: GoogleFonts.inter(
             fontWeight: FontWeight.bold,
           ),
@@ -35,7 +36,16 @@ class _HomePageState extends State<HomePage> {
             DrawerHeader(
               padding: EdgeInsets.all(20),
               child: Text(
-                "Meus alunos",
+                "Clinica Orto",
+                style: GoogleFonts.inter(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: Text(
+                "Serviços",
                 style: GoogleFonts.inter(
                   fontWeight: FontWeight.bold,
                 ),
@@ -44,18 +54,27 @@ class _HomePageState extends State<HomePage> {
             InkWell(
               onTap: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => FormStudent()),
+                  MaterialPageRoute(builder: (context) => FormPatient()),
                 );
               },
-              child: ListTile(
-                leading: const Icon(
-                  Icons.supervised_user_circle_rounded,
+              child: Container(
+                margin: const EdgeInsets.only(left: 10, bottom: 10),
+                decoration: BoxDecoration(
+                  color: Colors.blue[100],
+                  borderRadius: const BorderRadius.horizontal(
+                    left: Radius.circular(20),
+                  ),
                 ),
-                iconColor: Colors.black,
-                titleTextStyle: GoogleFonts.inter(
-                    fontWeight: FontWeight.bold, color: Colors.black),
-                title: Text(
-                  "Adicionar aluno",
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.sick,
+                  ),
+                  iconColor: Colors.black,
+                  titleTextStyle: GoogleFonts.inter(
+                      fontWeight: FontWeight.bold, color: Colors.black),
+                  title: const Text(
+                    "Adicionar paciente",
+                  ),
                 ),
               ),
             ),
@@ -65,16 +84,24 @@ class _HomePageState extends State<HomePage> {
               //     MaterialPageRoute(builder: (context) => FormStudent()),
               //   );
               // },
-              child: ListTile(
-                leading: const Icon(
-                  Icons.south_america_outlined,
+              child: Container(
+                margin: const EdgeInsets.only(left: 10, bottom: 2),
+                decoration: BoxDecoration(
+                  color: Colors.green[100],
+                  borderRadius: const BorderRadius.horizontal(
+                    left: Radius.circular(20),
+                  ),
                 ),
-                iconColor: Colors.black,
-                titleTextStyle: GoogleFonts.inter(
-                    fontWeight: FontWeight.bold, color: Colors.black),
-                title: Text(
-                  "Sobre",
-                  // style: GoogleFonts.inter(fontSize: 14, color: Colors.purple),
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.south_america_outlined,
+                  ),
+                  iconColor: Colors.black,
+                  titleTextStyle: GoogleFonts.inter(
+                      fontWeight: FontWeight.bold, color: Colors.black),
+                  title: Text(
+                    "Conheça mais sobre nós",
+                  ),
                 ),
               ),
             ),
@@ -86,7 +113,7 @@ class _HomePageState extends State<HomePage> {
           child: SizedBox(
             height: MediaQuery.of(context).size.height * 0.8,
             child: StreamBuilder(
-              stream: _student.snapshots(),
+              stream: _patient.snapshots(),
               builder: (context, AsyncSnapshot snapshots) {
                 if (snapshots.connectionState == ConnectionState.waiting) {
                   return const Center(
@@ -102,23 +129,27 @@ class _HomePageState extends State<HomePage> {
                       final DocumentSnapshot records =
                           snapshots.data!.docs[index];
                       return Container(
-                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
                         child: Slidable(
                           startActionPane: ActionPane(
                             motion: StretchMotion(),
                             children: [
                               SlidableAction(
                                 onPressed: (context) {
-                                  final student = Student(
+                                  final patient = Patient(
                                     id: records.id,
                                     name: records["name"],
-                                    email: records["email"],
+                                    years: records["years"],
+                                    phone: records["phone"],
+                                    diagnostic: records["diagnostic"],
+                                    // phone: records["phone"],
+                                    // diagnostic: records["diagnostic"],
                                   );
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => FormStudent(
-                                        student: student,
+                                      builder: (context) => FormPatient(
+                                        patient: patient,
                                         index: index,
                                       ),
                                     ),
@@ -135,8 +166,8 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               SlidableAction(
                                 onPressed: (context) {
-                                  StudentController().onDelete(
-                                    Student(id: records.id),
+                                  PatientController().onDelete(
+                                    Patient(id: records.id),
                                   );
                                 },
                                 icon: Icons.delete_forever,
@@ -168,16 +199,32 @@ class _HomePageState extends State<HomePage> {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              subtitle: records["email"] == ''
-                                  ? Text(
-                                      "Email não informado",
-                                      style: GoogleFonts.inter(
-                                          color: Colors.black26),
-                                    )
-                                  : Text(
-                                      records["email"],
-                                      style: GoogleFonts.inter(),
-                                    ),
+                              subtitle: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  records["years"] == ''
+                                      ? Text(
+                                          "Idade não informada",
+                                          style: GoogleFonts.inter(
+                                              color: Colors.black26),
+                                        )
+                                      : Text(
+                                          "${records["years"].toString()} anos",
+                                          style: GoogleFonts.inter(),
+                                        ),
+                                  records["phone"] == ''
+                                      ? Text(
+                                          "Telefone não informado",
+                                          style: GoogleFonts.inter(
+                                              color: Colors.black26),
+                                        )
+                                      : Text(
+                                          "${records["phone"].toString()}",
+                                          style: GoogleFonts.inter(),
+                                        ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
