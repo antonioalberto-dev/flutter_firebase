@@ -16,10 +16,10 @@ class TextFieldItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      validator: (value) {
-        if (value!.isEmpty) return "The $labelText is required";
-        return null;
-      },
+      // validator: (value) {
+      //   if (value!.isEmpty) return "The $labelText is required";
+      //   return null;
+      // },
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hinterText,

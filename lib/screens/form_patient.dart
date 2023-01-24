@@ -19,18 +19,18 @@ class _FormPatientState extends State<FormPatient> {
   bool isEditingMode = false;
   final TextEditingController idController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController yearsController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController diagnosticController = TextEditingController();
+  final TextEditingController? yearsController = TextEditingController();
+  final TextEditingController? phoneController = TextEditingController();
+  final TextEditingController? diagnosticController = TextEditingController();
 
   @override
   void initState() {
     if (widget.index != null) {
       idController.text = widget.patient!.id;
       nameController.text = widget.patient!.name;
-      yearsController.text = widget.patient!.years;
-      phoneController.text = widget.patient!.phone;
-      diagnosticController.text = widget.patient!.diagnostic;
+      yearsController!.text = widget.patient!.years;
+      phoneController!.text = widget.patient!.phone;
+      diagnosticController!.text = widget.patient!.diagnostic;
       isEditingMode = true;
     }
     super.initState();
@@ -59,19 +59,19 @@ class _FormPatientState extends State<FormPatient> {
               TextFieldItem(
                 labelText: "Idade",
                 hinterText: null,
-                controller: yearsController,
+                controller: yearsController!,
                 icon: Icons.cookie_rounded,
               ),
               TextFieldItem(
                 labelText: "Telefone",
                 hinterText: null,
-                controller: phoneController,
+                controller: phoneController!,
                 icon: Icons.local_phone_rounded,
               ),
               TextFieldItem(
                 labelText: "Diagnostico",
                 hinterText: null,
-                controller: diagnosticController,
+                controller: diagnosticController!,
                 icon: Icons.text_snippet_rounded,
               ),
               const SizedBox(height: 10),
@@ -82,16 +82,16 @@ class _FormPatientState extends State<FormPatient> {
                       PatientController().onUpdate(Patient(
                         id: idController.text,
                         name: nameController.text,
-                        years: yearsController.text,
-                        phone: phoneController.text,
-                        diagnostic: diagnosticController.text,
+                        years: yearsController!.text,
+                        phone: phoneController!.text,
+                        diagnostic: diagnosticController!.text,
                       ));
                     } else {
                       PatientController().onCreate(Patient(
                         name: nameController.text,
-                        years: yearsController.text,
-                        phone: phoneController.text,
-                        diagnostic: diagnosticController.text,
+                        years: yearsController!.text,
+                        phone: phoneController!.text,
+                        diagnostic: diagnosticController!.text,
                       ));
                     }
                   }

@@ -23,7 +23,7 @@ class _ListPatientState extends State<ListPatient> {
       appBar: AppBar(
         title: Text(
           "Pacientes",
-          style: GoogleFonts.inter(
+          style: GoogleFonts.ubuntu(
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -50,10 +50,11 @@ class _ListPatientState extends State<ListPatient> {
                       final DocumentSnapshot records =
                           snapshots.data!.docs[index];
                       return Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 2),
                         child: Slidable(
                           startActionPane: ActionPane(
-                            motion: StretchMotion(),
+                            motion: const StretchMotion(),
                             children: [
                               SlidableAction(
                                 onPressed: (context) {
@@ -81,7 +82,7 @@ class _ListPatientState extends State<ListPatient> {
                             ],
                           ),
                           endActionPane: ActionPane(
-                            motion: StretchMotion(),
+                            motion: const StretchMotion(),
                             children: [
                               SlidableAction(
                                 onPressed: (context) {
@@ -96,25 +97,38 @@ class _ListPatientState extends State<ListPatient> {
                             ],
                           ),
                           child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 2),
+                            margin: const EdgeInsets.symmetric(horizontal: 5),
                             decoration: BoxDecoration(
-                                color: Colors.black12,
+                                color: Colors.purple[50],
                                 borderRadius: BorderRadius.circular(5)),
                             child: ListTile(
                               leading: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const [
-                                  Icon(
-                                    Icons.account_circle,
-                                    size: 35,
-                                    color: Colors.purple,
-                                  ),
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.purple,
+                                      borderRadius: BorderRadius.circular(100),
+                                    ),
+                                    height: 50,
+                                    width: 50,
+                                    child: Center(
+                                      child: Text(
+                                        records["name"][0],
+                                        style: GoogleFonts.ubuntu(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  )
                                 ],
                               ),
                               title: Text(
                                 records["name"],
-                                style: GoogleFonts.inter(
+                                style: GoogleFonts.ubuntu(
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -125,22 +139,26 @@ class _ListPatientState extends State<ListPatient> {
                                   records["years"] == ''
                                       ? Text(
                                           "Idade não informada",
-                                          style: GoogleFonts.inter(
+                                          style: GoogleFonts.ubuntu(
                                               color: Colors.black26),
                                         )
                                       : Text(
-                                          "${records["years"].toString()} anos",
-                                          style: GoogleFonts.inter(),
+                                          records["years"].toString() == "1"
+                                              ? "${records["years"].toString()} ano"
+                                              : "${records["years"].toString()} anos",
+                                          style: GoogleFonts.ubuntu(
+                                              color: Colors.black54),
                                         ),
                                   records["phone"] == ''
                                       ? Text(
-                                          "Telefone não informado",
-                                          style: GoogleFonts.inter(
-                                              color: Colors.black26),
+                                          "Diagnostico não informado",
+                                          style: GoogleFonts.ubuntu(
+                                              color: Colors.black54),
                                         )
                                       : Text(
-                                          "${records["phone"].toString()}",
-                                          style: GoogleFonts.inter(),
+                                          "${records["diagnostic"].toString()}",
+                                          style: GoogleFonts.ubuntu(
+                                              color: Colors.black54),
                                         ),
                                 ],
                               ),
