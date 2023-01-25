@@ -18,25 +18,29 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(''),
+        iconTheme: IconThemeData(
+          color: Colors.blue[700],
+        ),
       ),
       drawer: Drawer(
+        backgroundColor: Colors.blue,
         child: ListView(
           children: [
             DrawerHeader(
               padding: const EdgeInsets.all(20),
-              child: Text(
-                "Clinica Orto",
-                style: GoogleFonts.inter(
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Image.asset(
+                "assets/2.png",
+                fit: BoxFit.fitWidth,
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              padding: const EdgeInsets.fromLTRB(30, 10, 30, 20),
               child: Text(
                 "Serviços",
-                style: GoogleFonts.inter(
+                style: GoogleFonts.ubuntu(
                   fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 20,
                 ),
               ),
             ),
@@ -44,13 +48,13 @@ class _HomePageState extends State<HomePage> {
               router: FormPatient(),
               title: "Adicionar paciente",
               icon: Icons.add_reaction_rounded,
-              color: Color.fromRGBO(144, 202, 249, 1),
+              color: Colors.black38,
             ),
             ItemMenu(
               router: const ListPatient(),
               title: "Meus pacientes",
               icon: Icons.personal_injury_rounded,
-              color: Color.fromRGBO(225, 190, 231, 1),
+              color: Colors.black38,
             ),
           ],
         ),

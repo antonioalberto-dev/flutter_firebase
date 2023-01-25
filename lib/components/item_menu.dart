@@ -40,10 +40,11 @@ class _ItemMenuState extends State<ItemMenu> {
         child: ListTile(
           leading: Icon(
             widget.icon,
+            size: 30,
           ),
-          iconColor: Colors.black,
+          iconColor: Colors.white,
           titleTextStyle: GoogleFonts.ubuntu(
-              fontWeight: FontWeight.w400, color: Colors.black),
+              fontWeight: FontWeight.w600, color: Colors.white, fontSize: 16),
           title: Text(
             widget.title,
           ),
