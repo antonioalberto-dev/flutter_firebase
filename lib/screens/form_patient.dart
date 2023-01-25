@@ -41,8 +41,18 @@ class _FormPatientState extends State<FormPatient> {
     return Scaffold(
       appBar: AppBar(
         title: isEditingMode == true
-            ? Text("Editando")
-            : Text("Cadastrando paciente"),
+            ? Text(
+                "Alteração de dados",
+                style: GoogleFonts.ubuntu(
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            : Text(
+                "Cadastro de paciente",
+                style: GoogleFonts.ubuntu(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -64,7 +74,7 @@ class _FormPatientState extends State<FormPatient> {
               ),
               TextFieldItem(
                 labelText: "Telefone",
-                hinterText: null,
+                hinterText: "(XX)XXXXX-XXXX",
                 controller: phoneController!,
                 icon: Icons.local_phone_rounded,
               ),
@@ -97,9 +107,22 @@ class _FormPatientState extends State<FormPatient> {
                   }
                   Navigator.pop(context);
                 },
+                style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll<Color>(Colors.blue),
+                ),
                 child: isEditingMode == true
-                    ? Text("Atualizar", style: GoogleFonts.inter())
-                    : Text("Salvar", style: GoogleFonts.inter()),
+                    ? Text("Atualizar",
+                        style: GoogleFonts.ubuntu(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ))
+                    : Text(
+                        "Salvar",
+                        style: GoogleFonts.ubuntu(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
               )
             ],
           ),

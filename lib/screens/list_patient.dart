@@ -39,7 +39,7 @@ class _ListPatientState extends State<ListPatient> {
                 if (snapshots.connectionState == ConnectionState.waiting) {
                   return const Center(
                     child: CircularProgressIndicator(
-                      color: Colors.purple,
+                      color: Colors.blue,
                     ),
                   );
                 }
@@ -99,7 +99,7 @@ class _ListPatientState extends State<ListPatient> {
                           child: Container(
                             margin: const EdgeInsets.symmetric(horizontal: 5),
                             decoration: BoxDecoration(
-                                color: Colors.purple[50],
+                                color: Colors.blue[100],
                                 borderRadius: BorderRadius.circular(5)),
                             child: ListTile(
                               leading: Column(
@@ -108,7 +108,7 @@ class _ListPatientState extends State<ListPatient> {
                                 children: [
                                   Container(
                                     decoration: BoxDecoration(
-                                      color: Colors.purple,
+                                      color: Colors.blue[800],
                                       borderRadius: BorderRadius.circular(100),
                                     ),
                                     height: 50,

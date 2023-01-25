@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TextFieldItem extends StatelessWidget {
   final labelText, hinterText;
@@ -23,10 +24,12 @@ class TextFieldItem extends StatelessWidget {
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hinterText,
+        labelStyle: GoogleFonts.ubuntu(),
+        hintStyle: GoogleFonts.ubuntu(),
         errorBorder: const OutlineInputBorder(
           borderSide: BorderSide(width: 3, color: Colors.red),
         ),
-        prefixIcon: Icon(icon, color: Colors.purple),
+        prefixIcon: Icon(icon, color: Colors.blue[600]),
       ),
     );
   }
